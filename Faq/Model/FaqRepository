@@ -1,0 +1,159 @@
+<?php
+/**
+ * THIS IS THE REPOSITORY
+ */
+
+namespace Magefan\Faq\Model;
+
+use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magefan\Faq\Api\Data\FaqSearchResultsInterface;
+use Magefan\Faq\Api\Data;
+use Magefan\Faq\Api\FaqRepositoryInterface;
+use Magefan\Faq\Model\ResourceModel\Faqmodel as FaqResource;
+use Magefan\Faq\Model\ResourceModel\Faqmodel\CollectionFactory;
+
+class FaqRepository implements FaqRepositoryInterface
+{
+
+    /**
+     * @var faqResource
+     */
+    private $faqResource;
+    /**
+     * @var faqFactory
+     */
+    private $faqFactory;
+    /**
+     * @var CollectionFactory
+     */
+    private $collectionFactory;
+    /**
+     * @var FaqSearchResultsInterfaceFactory
+     */
+    private $searchResultsFactory;
+
+    public function __construct(
+        FaqResource $faqResource,
+        FaqFactory $faqFactory,
+        CollectionFactory $collectionFactory,
+        FaqSearchResultsInterfaceFactory $searchResultsFactory
+    )
+    {
+        $this->customResource = $faqResource;
+        $this->customFactory = $faqFactory;
+        $this->collectionFactory = $collectionFactory;
+        $this->searchResults = $searchResultsFactory;
+    }
+
+    /**
+     * @param \Magefan\Faq\Api\Data\FaqInterface $custom
+     * @return int
+     */
+    public function save(\Magefan\Faq\Api\Data\FaqInterface $faq)
+    {
+        $this->faqResource->save($faq);
+        return $faq->getId();
+    }
+
+/**
+ * @param $faqmId
+ * @return \Magefan\Faq\Api\Data\FaqInterface int
+ * @throws \Magento\Framework\Exception\NoSuchEntityException
+ */
+public function getById($faqId)
+{
+    $Custom = $this->faqFactory->create();
+    $this->faqResource->load($faq, $faqId);
+    if(!$Custom->getId()) {
+        throw new NoSuchEntityException('Faq does not exist');
+    }
+    return $faq;
+}
+
+/**
+ * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+ * @return \Magefan\Faq\Api\Data\FaqSearchResultsInterface
+ */
+public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
+{
+    $collection = $this->collectionFactory->create();
+    foreach ($searchCriteria->getFilterGroups() as $group) {
+        $this->addFilterGroupToCollection($group, $collection);
+    }
+    /** @var Magento\Framework\Api\SortOrder $sortOrder */
+    foreach ((array)$searchCriteria->getSortOrders() as $sortOrder) {
+        $field = $sortOrder->getField();
+        $collection->addOrder(
+            $field,
+            $this->getDirection($sortOrder->getDirection())
+        );
+
+    }
+
+    $collection->setCurPage($searchCriteria->getCurrentPage());
+    $collection->setPageSize($searchCriteria->getPageSize());
+    $collection->load();
+    $searchResults = $this->searchResultsFactory->create();
+    $searchResults->setCriteria($searchCriteria);
+
+    $faqs=[];
+    foreach ($collection as $Faq){
+        $Customs[] = $Faq;
+    }
+    $searchResults->setItems($faqs);
+    $searchResults->setTotalCount($collection->getSize());
+    return $searchResults;
+}
+
+/**
+ * @param int $faqId
+ * @return bool
+ */
+public function delete($faqId)
+{
+    $faq = $this->faqFactory->create();
+    $faq->setId($faqId);
+    if( $this->faqResource->delete($faq)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * @param int $faqId
+ * @return string
+ */
+public function getAssociatedProductsIds($faqId)
+{
+    $productIds = $this->faqResource
+        ->getAssociatedProductIds($faqId);
+    return json_encode($productIds);
+}
+
+private function getDirection($direction)
+{
+    return $direction == SortOrder::SORT_ASC ?: SortOrder::SORT_DESC;
+}
+
+/**
+ * @param \Magento\Framework\Api\Search\FilterGroup $group
+ * @param FaqResource\Collection $collection
+ */
+private function addFilterGroupToCollection($group, $collection)
+{
+    $fields = [];
+    $conditions = [];
+
+    foreach($group->getFilters() as $filter){
+        $condition = $filter->getConditionType() ?: 'eq';
+        $field = $filter->getField();
+        $value = $filter->getValue();
+        $fields[] = $field;
+        $conditions[] = [$condition=>$value];
+
+    }
+    $collection->addFieldToFilter($fields, $conditions);
+}
+}

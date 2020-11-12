@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="magefan_frankenstein_cron_uppricecronmodel" instance="Magefan\Frankenstein\Cron\UpPriceCronModel" method="execute">
+            <schedule>0 2 * * 1-5 </schedule>
+        </job>
+    </group>
+</config>

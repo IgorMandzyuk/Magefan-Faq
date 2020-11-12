@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magefan_Faq::magefan_faq"
+             resource="Magefan_Faq::magefan_faq"
+             title="Magefan Faq"
+             action="magefan_faq/index/index"
+             module="Magefan_Faq"
+             sortOrder="999"
+             parent="Magento_Backend::content_elements"
+             dependsOnModule="Magento_Backend"
+        /></menu>
+</config>
+
+

@@ -1,0 +1,26 @@
+{
+    "name": "magefan/module-faq",
+    "description": "",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        },
+        {
+            "email": "mr.mandzyuk@gmail.com",
+            "name": "\u0418\u0433\u043e\u0440\u044c \u041c\u0430\u043d\u0434\u0437\u044e\u043a"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magefan\\Faq\\": ""
+        }
+    }
+}

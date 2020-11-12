@@ -1,0 +1,13 @@
+<h1>This is template from Faq module</h1>
+
+<?php /** @var $block \Magefan\Faq\Block\Faq */ ?>
+<!-- Call block function -->
+
+ <?php $a = $block->getFaqItem(); ?>
+   <h3><?php $b = $a->getData('question')?></h3></br>
+    <h4><?php echo $b = $a->getData('answer');  ?></h4></br>
+
+
+
+ <!-- <?php // $viewModel = $block->getViewModel(); ?> -->
+ <!-- <?php // echo $block->escapeHtml($viewModel->display()); ?> -->
