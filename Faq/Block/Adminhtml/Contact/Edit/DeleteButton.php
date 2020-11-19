@@ -7,9 +7,18 @@ use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-
+use Magento\Framework\UrlInterface;
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
+
+    public function __construct(
+        Context $context,
+        Registry $registry,
+        UrlInterface $urlBuilder
+    ) {
+        parent::__construct($context,$registry);
+        $this->urlBuilder = $urlBuilder;
+    }
 
     public function getButtonData()
     {
@@ -24,8 +33,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
 
     public function getDeleteUrl()
     {
-        $urlInterface = ObjectManager::getInstance()->get(\Magento\Framework\UrlInterface::class);
-        $url = $urlInterface->getCurrentUrl();
+        $url = $this->urlBuilder->getCurrentUrl();
 
         $parts = explode('/', parse_url($url, PHP_URL_PATH));
 

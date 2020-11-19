@@ -23,7 +23,6 @@ class Faq extends \Magento\Framework\View\Element\Template
      */
     private $faqFactory;
     private $faqRepository;
-    private $searchCriteriaBuilder;
     /**
      * @var LoggerInterface
      */
@@ -69,17 +68,10 @@ class Faq extends \Magento\Framework\View\Element\Template
      */
     public function getFaqItem()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $searchCriteriaBuilder = $objectManager->create(\Magento\Framework\Api\SearchCriteriaBuilder::class);
         try {
             return $this->faqRepository->getById($this->_request->getParam('id'));
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             return "This id don`t exist, please try another id!";
         }
-            /**
-          $faq = $this->faqFactory->create();
-          $result = $this->faqmodel->load($faq, $this->_request->getParam('id'));
-          return $faq;
-             */
     }
 }

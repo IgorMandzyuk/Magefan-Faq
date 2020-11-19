@@ -7,6 +7,7 @@ use Magefan\Faq\Model\FaqRepository;
 use Magefan\Faq\Model\ResourceModel\Faqmodel\CollectionFactory;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class Display extends \Magento\Framework\View\Element\Template
 {
@@ -21,7 +22,7 @@ class Display extends \Magento\Framework\View\Element\Template
     private $faqRepository;
     private $filterBuilder;
     /**
-     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     * @var SearchCriteriaBuilder
      */
     private $searchCriteriaBuilder;
 
@@ -33,6 +34,7 @@ class Display extends \Magento\Framework\View\Element\Template
      * @param CollectionFactory $collectionFactory
      * @param FaqmodelFactory $faqFactory
      * @param FaqRepository $faqRepository
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param array $data
      */
     public function __construct(
@@ -41,6 +43,7 @@ class Display extends \Magento\Framework\View\Element\Template
         CollectionFactory $collectionFactory,
         FaqmodelFactory $faqFactory,
         FaqRepository $faqRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
         array $data = []
     ) {
 
@@ -49,20 +52,14 @@ class Display extends \Magento\Framework\View\Element\Template
         $this->collectionFactory = $collectionFactory;
         $this->faqRepository = $faqRepository;
         $this->faqFactory = $faqFactory;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
     public function sayHello()
     {
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $searchCriteriaBuilder = $objectManager->create(\Magento\Framework\Api\SearchCriteriaBuilder::class);
-        $searchCriteria = $searchCriteriaBuilder->addFilter('status', '1', 'eq')->create();
+        $searchCriteria = $this->searchCriteriaBuilder->addFilter('status', '1', 'eq')->create();
         $faqs = $this->faqRepository->getList($searchCriteria);
         return $faqs->getItems();
 
-        /**
-            $collection = $this->collectionFactory->create();
-            $collection->addFieldToFilter('status', 1);
-            return $collection->getItems();
-        */
     }
 }

@@ -80,9 +80,6 @@ class Restrictcmspage implements ObserverInterface
 
                $this->redirect->redirect($controller->getResponse(), '/');
 
-            //if (!$this->customerSession->isLoggedIn()) {
-            //    $this->redirect->redirect($controller->getResponse(), 'customer/account/login');
-            //}
         }
     }
 

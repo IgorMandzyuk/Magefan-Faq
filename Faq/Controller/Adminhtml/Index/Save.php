@@ -4,6 +4,7 @@ namespace Magefan\Faq\Controller\Adminhtml\Index;
 use Exception;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\View\Result\PageFactory;
 use Magefan\Faq\Model\FaqmodelFactory;
@@ -24,14 +25,20 @@ class Save extends Action
      * @var Http
      */
     private $request;
+    /**
+     * @var Session
+     */
+    private $adminSession;
 
     public function __construct(
+        Session $adminSession,
         Http $request,
         Context $context,
         PageFactory $resultPageFactory,
         FaqmodelFactory $faqmodelFactory,
         FaqRepository $faqRepository
     ) {
+        $this->adminSession = $adminSession;
         $this->request = $request;
         $this->faqRepository = $faqRepository;
         $this->resultPageFactory = $resultPageFactory;
@@ -45,7 +52,6 @@ class Save extends Action
         $data = $this->getRequest()->getPostValue();
         if ($data) {
             try {
-                /**" $id = $this->getRequest()->getParam ( 'id' ); */
                  $id = (int)$this->getRequest()->getParam('id');
                 try {
                     $contact = $this->faqRepository->getById($id);
@@ -58,15 +64,14 @@ class Save extends Action
                 });
 
                 $contact->setData($data);
-                 /**  $contact->save(); */
                 $this->faqRepository->save($contact);
 
                 $this->messageManager->addSuccess(__('Successfully saved the item.'));
-                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData(false);
+                $this->adminSession->setFormData(false);
                 return $resultRedirect->setPath('*/*/');
             } catch (Exception $e) {
                 $this->messageManager->addError($e->getMessage());
-                $this->_objectManager->get(\Magento\Backend\Model\Session::class)->setFormData($data);
+                $this->adminSession->setFormData($data);
                 return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id') ]);
             }
         }
