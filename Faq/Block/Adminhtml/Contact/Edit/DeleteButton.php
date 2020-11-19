@@ -24,7 +24,7 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
 
     public function getDeleteUrl()
     {
-        $urlInterface = ObjectManager::getInstance()->get('Magento\Framework\UrlInterface');
+        $urlInterface = ObjectManager::getInstance()->get(\Magento\Framework\UrlInterface::class);
         $url = $urlInterface->getCurrentUrl();
 
         $parts = explode('/', parse_url($url, PHP_URL_PATH));

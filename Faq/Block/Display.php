@@ -54,7 +54,7 @@ class Display extends \Magento\Framework\View\Element\Template
     public function sayHello()
     {
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $searchCriteriaBuilder = $objectManager->create('Magento\Framework\Api\SearchCriteriaBuilder');
+        $searchCriteriaBuilder = $objectManager->create(\Magento\Framework\Api\SearchCriteriaBuilder::class);
         $searchCriteria = $searchCriteriaBuilder->addFilter('status', '1', 'eq')->create();
         $faqs = $this->faqRepository->getList($searchCriteria);
         return $faqs->getItems();

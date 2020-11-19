@@ -66,7 +66,7 @@ class Save extends Action
                 return $resultRedirect->setPath('*/*/');
             } catch (Exception $e) {
                 $this->messageManager->addError($e->getMessage());
-                $this->_objectManager->get('Magento\Backend\Model\Session')->setFormData($data);
+                $this->_objectManager->get(\Magento\Backend\Model\Session::class)->setFormData($data);
                 return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id') ]);
             }
         }
