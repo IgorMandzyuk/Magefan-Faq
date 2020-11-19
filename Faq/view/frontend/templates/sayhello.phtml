@@ -2,12 +2,17 @@
 <?php /** @var $block \Magefan\Faq\Block\Display */ ?>
 <!-- Call block function -->
 <?php  foreach ($block->sayHello() as $fq):?>
-        <a href="<?php echo $block->getUrl(
-                'faq/index/view', ['id'=> $fq->getId(),'question'=>preg_replace('![\s]+!', "-" ,
-                    $fq->getQuestion())]) ?>"><?php echo $fq->getQuestion()?></a> </br>
+    <a href="<?php echo $block->getUrl(
+        'faq/index/view',
+        ['id' => $fq->getId(), 'question' => preg_replace(
+            '![\s]+!',
+            "-",
+            $fq->getQuestion()
+        )]
+    ) ?>"><?php echo $fq->getQuestion() ?></a> </br>
     <?php endforeach?>
 
 <!-- Call model function -->
-<!--  <?php// $viewModel = $block->getViewModel(); ?>  -->
- <!-- <h1><?php// echo $block->escapeHtml($viewModel->getTitle()); ?></h1> -->
+ <?php /** $viewModel = $block->getViewModel(); */ ?>
+<h1><?php /** echo $block->escapeHtml($viewModel->getTitle()); */ ?></h1>
 

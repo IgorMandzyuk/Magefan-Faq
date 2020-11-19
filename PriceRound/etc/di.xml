@@ -1,6 +1,6 @@
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
-    <type name="Magento\Directory\Model\Currency">
-        <plugin name="Magefan_PriceRound" type="Magefan\PriceRound\Plugin\Currency" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="change_product" type="Magefan\PriceRound\Plugin\Product" sortOrder="1" disabled="true"/>
     </type>
 </config>

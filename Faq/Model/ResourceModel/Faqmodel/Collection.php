@@ -11,6 +11,6 @@ class Collection extends AbstractCollection
 
     protected function _construct()
     {
-        $this->_init('Magefan\Faq\Model\Faqmodel', 'Magefan\Faq\Model\ResourceModel\Faqmodel');
+        $this->_init(\Magefan\Faq\Model\Faqmodel::class, \Magefan\Faq\Model\ResourceModel\Faqmodel::class);
     }
 }

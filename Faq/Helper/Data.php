@@ -2,8 +2,10 @@
 
 namespace Magefan\Faq\Helper;
 
-
 use Magento\Framework\App\Helper\AbstractHelper;
+use Magento\Framework\App\Response\Http;
+use Magento\Framework\UrlFactory;
+use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\App\Helper\Context;
@@ -14,31 +16,30 @@ class Data extends AbstractHelper
     protected $storeManager;
     protected $objectManager;
 
-    const XML_PATH_FAQ = 'faq/group_id/field_id';
+    const XML_PATH_FAQ = 'faq/general/active';
     /**
-     * @var \Magento\Framework\App\Response\Http
+     * @var Http
      */
     private $_response;
     /**
-     * @var \Magento\Framework\UrlFactory
+     * @var UrlFactory
      */
 
     /**
      * @var \Magento\Framework\App\Action\Context
      */
     private $context;
-    private  $response;
-    private  $redirect;
+    private $response;
+    private $redirect;
     /**
-     * @var \Magento\Framework\UrlInterface
+     * @var UrlInterface
      */
     private $url;
     private $resultForwardFactory;
 
-
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\UrlInterface $url,
+        UrlInterface $url,
         \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {

@@ -3,6 +3,7 @@
 
 namespace Magefan\Faq\Controller\Index;
 
+use Magento\Framework\Controller\Result\ForwardFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 
@@ -11,35 +12,38 @@ use Magento\Framework\App\Helper\AbstractHelper;
  */
 class View extends \Magento\Framework\App\Action\Action
 {
-    protected $_helper;
-    protected $_pageFactory;
+    protected $helper;
+    protected $pageFactory;
     /**
-     * @var \Magento\Framework\Controller\Result\ForwardFactory
+     * @var ForwardFactory
      */
     private $_forwardFactory;
+    /**
+     * @var ForwardFactory
+     */
+    private $forwardFactory;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magefan\Faq\Helper\Data $helper,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Magento\Framework\Controller\Result\ForwardFactory $forwardFactory)
-    {
-        $this->_pageFactory = $pageFactory;
-        $this->_helper = $helper;
-        $this->_forwardFactory = $forwardFactory;
+        ForwardFactory $forwardFactory
+    ) {
+        $this->pageFactory = $pageFactory;
+        $this->helper = $helper;
+        $this->forwardFactory = $forwardFactory;
         return parent::__construct($context);
-
     }
 
- public function execute()
- {
-     $moduleStatus = $this->_helper->getConfig();
-     if ($moduleStatus){
-         return $this->_pageFactory->create();
-     }
-     $resultForward = $this->_forwardFactory->create();
-     $resultForward->setController('view');
-     $resultForward->forward('defaultNoRoute');
-     return $resultForward;
- }
+    public function execute()
+    {
+        $moduleStatus = $this->helper->getConfig();
+        if ($moduleStatus) {
+            return $this->pageFactory->create();
+        }
+        $resultForward = $this->forwardFactory->create();
+        $resultForward->setController('view');
+        $resultForward->forward('defaultNoRoute');
+        return $resultForward;
+    }
 }

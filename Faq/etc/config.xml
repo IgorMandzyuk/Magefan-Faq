@@ -2,9 +2,9 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <faq>
-            <group_id>
-                <field_id>1</field_id>
-            </group_id>
+            <general>
+                <active>1</active>
+            </general>
         </faq>
     </default>
 </config>

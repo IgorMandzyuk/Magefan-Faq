@@ -3,7 +3,6 @@
 
 namespace Magefan\Faq\Block\Adminhtml\Contact\Edit;
 
-
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class BackButton extends GenericButton implements ButtonProviderInterface

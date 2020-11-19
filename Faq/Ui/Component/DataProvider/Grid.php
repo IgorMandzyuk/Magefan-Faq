@@ -7,12 +7,12 @@ use Magefan\Faq\Model\ResourceModel\Faqmodel\Collection;
 class Grid extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
     /**
-     * @param string $name
-     * @param string $primaryFieldName
-     * @param string $requestFieldName
+     * @param string     $name
+     * @param string     $primaryFieldName
+     * @param string     $requestFieldName
      * @param Collection $employeeCollectionFactory
-     * @param array $meta
-     * @param array $data
+     * @param array      $meta
+     * @param array      $data
      */
     public function __construct(
         $name,

@@ -21,4 +21,3 @@ class Faqmodel extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
         $this->_init('magefan_faq', 'id');
     }
 }
-

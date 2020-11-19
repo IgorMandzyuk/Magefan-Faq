@@ -5,7 +5,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Magento_Backend::content">
                     <resource id="Magento_Backend::content_elements">
-                        <resource id="Magefan_Faq::faq" title="Faqs" translate="title" sortOrder="100"/>
+                        <resource id="Magefan_Faq::magefan_faq" title="Magefan Faq" translate="title" sortOrder="100"/>
                     </resource>
                 </resource>
             </resource>

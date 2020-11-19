@@ -3,7 +3,6 @@
 
 namespace Magefan\Faq\Block\Adminhtml\Contact\Edit;
 
-
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class SaveButton extends GenericButton implements ButtonProviderInterface
@@ -17,13 +16,12 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
                 'mage-init' => ['button' => ['event' => 'save']],
                 'form-role' => 'save',
             ],
-            //'on_click' => sprintf("location.href= '%s';", $this->getSaveUrl()),
             'sort_order' => 90
         ];
     }
 
     public function getSaveUrl()
     {
-        return $this->getUrl('*/*/save', []) ;
+        return $this->getUrl('*/*/save', []);
     }
 }

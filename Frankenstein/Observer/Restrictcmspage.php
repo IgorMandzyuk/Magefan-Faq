@@ -62,7 +62,7 @@ class Restrictcmspage implements ObserverInterface
      */
     public function execute(Observer $observer)
     {
-        if ($this->getArea() === 'frontend' && !$this->customerSession->isLoggedIn()) {
+        if ($this->getArea() === 'frontend' && !$this->customerSession->getCustomerGroupId() ) {
             $controllerName = $observer->getEvent()->getRequest()->getControllerName();
             $controller = $observer->getControllerAction();
 

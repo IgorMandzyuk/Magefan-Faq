@@ -31,7 +31,6 @@
         </arguments>
     </virtualType>
 
-
         <preference for="Magefan\Faq\Api\Data\FaqInterface" type="Magefan\Faq\Model\Faq" />
         <preference for="Magefan\Faq\Api\Data\FaqSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
         <preference for="Magefan\Faq\Api\FaqRepositoryInterface" type="Magefan\Faq\Model\FaqRepository" />

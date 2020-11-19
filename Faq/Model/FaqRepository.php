@@ -49,7 +49,7 @@ class FaqRepository implements FaqRepositoryInterface
 
     /**
      * @param ResourceFaq $resource
-     * @param \Magefan\Faq\Model\FaqmodelFactory $faqFactory
+     * @param FaqFactory $faqFactory
      * @param FaqCollectionFactory $faqCollectionFactory
      * @param FaqSearchResultsInterfaceFactory $searchResultsFactory
      * @param CollectionProcessorInterface $collectionProcessor
@@ -69,7 +69,7 @@ class FaqRepository implements FaqRepositoryInterface
     }
 
     /**
-     * @param FaqInterface $faq
+     * @param  FaqInterface $faq
      * @return FaqInterface
      * @throws CouldNotSaveException
      */
@@ -85,7 +85,7 @@ class FaqRepository implements FaqRepositoryInterface
     }
 
     /**
-     * @param int $faqId
+     * @param  int $faqId
      * @return FaqInterface
      * @throws NoSuchEntityException
      */
@@ -104,17 +104,15 @@ class FaqRepository implements FaqRepositoryInterface
     }
 
     /**
-     * @param SearchCriteriaInterface $searchCriteria
+     * @param  SearchCriteriaInterface $searchCriteria
      * @return FaqSearchResultsInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria)
     {
-        /** @var \Magefan\Faq\Model\ResourceModel\Faqmodel\Collection $collection */
         $collection = $this->faqCollectionFactory->create();
 
         $this->collectionProcessor->process($searchCriteria, $collection);
 
-        /** @var \Magefan\Faq\Api\Data\FaqSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setItems($collection->getItems());
@@ -123,7 +121,7 @@ class FaqRepository implements FaqRepositoryInterface
     }
 
     /**
-     * @param FaqInterface $faq
+     * @param  FaqInterface $faq
      * @return bool true on success
      * @throws CouldNotDeleteException
      */
@@ -140,8 +138,10 @@ class FaqRepository implements FaqRepositoryInterface
     }
 
     /**
-     * @param int $faqId
+     * @param  int $faqId
      * @return bool true on success
+     * @throws CouldNotDeleteException
+     * @throws NoSuchEntityException
      */
     public function deleteById($faqId)
     {

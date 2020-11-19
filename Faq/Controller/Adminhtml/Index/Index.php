@@ -9,13 +9,13 @@ use Magento\Framework\View\Result\PageFactory;
 class Index extends Action
 {
 
-    const ADMIN_RESOURCE = 'Magefan_Cot::magefan_faq_menu';
+    const ADMIN_RESOURCE = 'Magefan_Faq::magefan_faq';
 
     protected $resultPageFactory;
     public function __construct(
         Context $context,
-        PageFactory $resultPageFactory)
-    {
+        PageFactory $resultPageFactory
+    ) {
         $this->resultPageFactory = $resultPageFactory;
         parent::__construct($context);
     }

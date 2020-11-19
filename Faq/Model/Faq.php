@@ -16,7 +16,6 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
 
     protected $_eventPrefix = self::CACHE_TAG;
 
-
     /**
      * Initialize resource model
      *
@@ -50,7 +49,7 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
     /**
      * Set id
      *
-     * @param int $id
+     * @param  int $id
      * @return $this
      */
     public function setId($id)
@@ -71,7 +70,7 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
     /**
      * Set question
      *
-     * @param string $question
+     * @param  string $question
      * @return $this
      */
     public function setQuestion($question)
@@ -92,7 +91,7 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
     /**
      * Set answer
      *
-     * @param string $answer
+     * @param  string $answer
      * @return $this
      */
     public function setAnswer($answer)
@@ -113,7 +112,7 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
     /**
      * Set product sku
      *
-     * @param string $product_sku
+     * @param  string $product_sku
      * @return $this
      */
     public function setProductSku($product_sku)
@@ -134,7 +133,7 @@ class Faq extends AbstractModel implements FaqInterface, IdentityInterface
     /**
      * Set status
      *
-     * @param int|bool $status
+     * @param  int|bool $status
      * @return $this
      */
     public function setStatus($status)

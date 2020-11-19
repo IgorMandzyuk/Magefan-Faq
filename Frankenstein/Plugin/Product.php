@@ -2,12 +2,9 @@
 
 namespace Magefan\Frankenstein\Plugin;
 
-
-
-class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
+class Product
 {
-
-    function afterToHtml(\Magento\Catalog\Pricing\Render\FinalPriceBox $subject, $result)
+    public function afterGetPrice(\Magento\Catalog\Model\Product $subject, $result)
     {
         if ($this->getCustomer()->getGroupId() == 2) {
             return $result;
@@ -15,5 +12,4 @@ class FinalPriceBox extends \Magento\Catalog\Pricing\Render\FinalPriceBox
             return '';
         }
     }
-
 }
