@@ -10,6 +10,10 @@ use Magento\Framework\UrlInterface;
 class GenericButton
 {
     /**
+     * @var Context
+     */
+    protected $context;
+    /**
      * Url Builder
      *
      * @var UrlInterface
@@ -35,6 +39,7 @@ class GenericButton
     ) {
         $this->urlBuilder = $context->getUrlBuilder();
         $this->registry = $registry;
+        $this->context = $context;
     }
 
     /**
